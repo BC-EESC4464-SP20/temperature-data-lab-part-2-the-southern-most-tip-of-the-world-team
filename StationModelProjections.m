@@ -30,7 +30,8 @@ function [baseline_model, P] = StationModelProjections(station_number)
 %==================================================================
 
 %% Read and extract the data from your station from the csv file
-filename = ['model' num2str(station_number) '.csv'];
+load 'GlobalStationsLatLon.mat'
+% filename = ['model' num2str(station_number) '.csv'];
 %Extract the year and annual mean temperature data
 %<--
 
