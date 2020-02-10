@@ -12,7 +12,17 @@ load GlobalStationsLatLon.mat
 RecentYear = 1960; %you can see how your results change if you vary this value
 
 %Initialize arrays to hold slope and intercept values calculated for all stations
-P_all = NaN(length(sta),2); %example of how to do this for the full observational period
+
+P_all = NaN(length(sta),2); 
+P_recent= NaN(length(sta),2)
+
+
+
+for i = 1:18
+    [P_all(i,1:2), P_recent(i,1:2)] = StationTempObs_LinearTrend(sta(i), RecentYear)
+
+end 
+%example of how to do this for the full observational period
 %<-- do the same thing just for values from RecentYear to today
 
 %Use a for loop to calculate the linear trend over both the full
