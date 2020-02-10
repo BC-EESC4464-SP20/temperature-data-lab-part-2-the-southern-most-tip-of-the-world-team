@@ -38,13 +38,33 @@ load coastlines
 plotm(coastlat,coastlon)
 plotm(lat,lon,'m.','markersize',15)
 title('Locations of stations with observational temperature data')
+colorbar (P_recent) 
+colorbar('EastOutside')
+
+
 
 %% 3b. Make a global map of the rate of temperature change at each station
 % Follow the model from 3a, now using the function scatterm rather than plotm
 %to plot symbols for all 18 stations colored by the rate of temperature
 %change from RecentYear to present (i.e. the slope of the linear trendline)
-%<--
 
+figure(1); clf
+worldmap('World')
+load coastlines
+plotm(coastlat,coastlon)
+plotm(lat,lon,'m.','markersize',15)
+plot(P_recent,sta)
+title('Locations of stations with observational temperature data')
+colorbar (y)
+colorbar ('EastOutside')
+colorbar (
+
+hold on 
+for i=1:18
+    scatterm(lat(1,i),lon(1,i),p_recent(i,1))
+    
+end
+    
 %% Extension option: again using scatterm, plot the difference between the
 %local rate of temperature change (plotted above) and the global mean rate
 %of temperature change over the same period (from your analysis of the
