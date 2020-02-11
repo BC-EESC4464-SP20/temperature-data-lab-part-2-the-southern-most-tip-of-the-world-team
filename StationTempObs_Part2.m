@@ -17,7 +17,6 @@ P_all = NaN(length(sta),2);
 P_recent= NaN(length(sta),2)
 
 
-
 for i = 1:18
     [P_all(i,1:2), P_recent(i,1:2)] = StationTempObs_LinearTrend(sta(i), RecentYear)
 
@@ -52,18 +51,17 @@ figure(1); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
-plotm(lat,lon,'m.','markersize',15)
+matrix_p_recent= P_recent(:,1)'
+scatterm(lat, lon, 100, matrix_p_recent, 'filled')
 plot(P_recent,sta)
-title('Locations of stations with observational temperature data')
-colorbar (y)
-colorbar ('EastOutside')
-colorbar (
+title('Rate of Temperature Change from 1960 to Present (°C per Decade)')
+colorbar 'EastOutside'
 
-hold on 
-for i=1:18
-    scatterm(lat(1,i),lon(1,i),p_recent(i,1))
+
+
+
     
-end
+
     
 %% Extension option: again using scatterm, plot the difference between the
 %local rate of temperature change (plotted above) and the global mean rate
