@@ -43,7 +43,16 @@ title('Locations of stations with observational temperature data')
 % Follow the model from 3a, now using the function scatterm rather than plotm
 %to plot symbols for all 18 stations colored by the rate of temperature
 %change from RecentYear to present (i.e. the slope of the linear trendline)
-%<--
+
+colorbar 'EastOutside'
+for i = 1:18
+scatterm(lat,lon,250,'filled')
+end 
+% for i = 1:18
+% scatterm(lat,lon,30,i)
+% P_recent
+% end
+
 
 %% Extension option: again using scatterm, plot the difference between the
 %local rate of temperature change (plotted above) and the global mean rate
