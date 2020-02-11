@@ -69,7 +69,8 @@ colorbar 'EastOutside'
 %global mean temperature data in Part 1 of this lab).
 %Data visualization recommendation - use the colormap "balance" from the
 %function cmocean, which is a good diverging colormap option
-%<--
+%***********************
+%Do we need to do this? Did we calculate the gloabl mean tempature change?
 
 %% 4. Now calculate the projected future rate of temperature change at each of these 18 stations
 % using annual mean temperature data from GFDL model output following the
