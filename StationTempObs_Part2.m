@@ -88,7 +88,18 @@ colorbar 'EastOutside'
 %each station
 % Initialize arrays to hold all the output from the for loop you will write
 % below
-%<--
+
+filename = ['model' num2str(sta) '.csv'];
+projectedstationdata = readtable(filename);
+
+P = NaN(length(sta),2); 
+baseline_model= NaN(length(sta),2)
+
+for i=1:18
+   [P_all(i,1:2), P_recent(i,1:2)] = StationTempObs_LinearTrend(sta(i), RecentYear)
+[baseline_model(i, 1:2), P (i, 1:2)] = StationModelProjections(sta(i))
+end 
+
 
 % Write a for loop that will use the function StationModelProjections to
 % extract from the model projections for each station:
