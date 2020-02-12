@@ -15,16 +15,13 @@ RecentYear = 1960; %you can see how your results change if you vary this value
 %Initialize arrays to hold slope and intercept values calculated for all stations
 % its only holding an array from one file and not all of them
 %is it an issue of loading files or am i running the wrong things
-
-
-
+for i=1:18
 filename = [num2str(sta(i)) '.csv'];
 stationdata = readtable(filename);
+end 
 
 P_all = NaN(length(sta),2); 
 P_recent= NaN(length(sta),2)
-
-for i=1:18
    [P_all(i,1:2), P_recent(i,1:2)] = StationTempObs_LinearTrend(sta(i), RecentYear)
  end 
 %example of how to do this for the full observational period
@@ -43,7 +40,8 @@ load coastlines
 plotm(coastlat,coastlon)
 plotm(lat,lon,'m.','markersize',15)
 title('Locations of stations with observational temperature data')
-
+colorbar (P_recent) 
+colorbar('EastOutside')
 
 
 
