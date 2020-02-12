@@ -84,9 +84,6 @@ colorbar 'EastOutside'
 % Initialize arrays to hold all the output from the for loop you will write
 % below
 
-filename = ['model'(num2str(station_number)) '.csv'];
-stationdata = readtable(filename);
-
 P = NaN(length(sta),2); 
 baseline_model= NaN(length(sta),2);
 
