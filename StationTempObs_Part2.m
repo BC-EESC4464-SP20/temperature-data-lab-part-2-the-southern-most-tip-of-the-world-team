@@ -1,3 +1,4 @@
+
 %% Add a comment at the top with the names of all members of your group
 
 %% 1. Load in a list of all 18 stations and their corresponding latitudes and longitudes
@@ -13,14 +14,13 @@ RecentYear = 1960; %you can see how your results change if you vary this value
 
 %Initialize arrays to hold slope and intercept values calculated for all stations
 
-P_all = NaN(length(sta),2); 
-P_recent= NaN(length(sta),2)
+% P_all = NaN(length(sta),2); 
+% P_recent= NaN(length(sta),2)
 
 
 for i = 1:18
-    [P_all(i,1:2), P_recent(i,1:2)] = StationTempObs_LinearTrend(sta(i), RecentYear)
-
-end 
+   [P_all(i,1:2), P_recent(i,1:2)] = StationTempObs_LinearTrend(sta(i), RecentYear)
+ end 
 %example of how to do this for the full observational period
 %<-- do the same thing just for values from RecentYear to today
 
@@ -46,6 +46,7 @@ colorbar('EastOutside')
 % Follow the model from 3a, now using the function scatterm rather than plotm
 %to plot symbols for all 18 stations colored by the rate of temperature
 %change from RecentYear to present (i.e. the slope of the linear trendline)
+
 
 figure(1); clf
 worldmap('World')
