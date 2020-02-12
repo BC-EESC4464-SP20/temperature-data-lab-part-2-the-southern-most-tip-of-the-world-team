@@ -30,7 +30,7 @@ function [baseline_model, P] = StationModelProjections(station_number)
 %==================================================================
 
 %% Read and extract the data from your station from the csv file
-filename = ['model' num2str(station_number) '.csv'];
+filename = ['model' num2str(40300) '.csv'];
     %('model' num2str(stationdata) '.csv');
 twentyfirst_stationdata = readtable(filename);
 
@@ -45,8 +45,6 @@ NewYear=twentyfirst_stationdata.Year
 recentyears =find((NewYear>=2006)&(NewYear<= 2025))
 recentmean = mean(twentyfirst_stationdata.AnnualMeanTemperature(recentyears))
 tempStd = nanstd(twentyfirst_stationdata.AnnualMeanTemperature)
-baseline_model= [recentmean, tempStd]
-
 %% Calculate the 5-year moving mean smoothed annual mean temperature anomaly over the modeled period
 % Note that you could choose to provide these as an output if you want to
 % have these values available to plot.
@@ -54,9 +52,9 @@ baseline_model= [recentmean, tempStd]
 tempAnnMeanAnomaly = twentyfirst_stationdata.AnnualMeanTemperature - recentmean
  %<-- smoothed anomaly
 movmeanavg = movmean(tempAnnMeanAnomaly, 5)
+baseline_model = mean(r(recentyears))
 %% Calculate the linear trend in temperature this station over the modeled 21st century period
-%[New_all, New_recent] = StationModelProjection('403001.csv', recentyears)
-% New_all = polyfit(twentyfirst_stationdata.Year(NewYear),TempAnnMeanAnomaly(NewYear));
+
 %     %also calculate the slope and intercept of a best fit line just from
 %     %1960 to the end of the observational period
 % % indrecent = find(Year == recentyears);

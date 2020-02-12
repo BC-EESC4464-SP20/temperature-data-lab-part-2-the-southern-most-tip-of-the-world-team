@@ -30,6 +30,7 @@ function [P_all, P_recent] = StationTempObs_LinearTrend(station_number, RecentYe
 %% Read in the file for your station as a data table
 filename = [num2str(station_number) '.csv'];
 stationdata = readtable(filename);
+% check in github to see if we changed
 
 %% Calculate the annual climatology
 % Extract the monthly temperature data from the table and store it in an
@@ -57,7 +58,7 @@ for i = 1:12
 end
 
 %% Calculate the annual mean temperature for each year
-TempAnnMean = mean(tempData');
+tempAnnMean = mean(tempData');
 
 %% Calculate the temperature anomaly for each year, compared to the 1981-2000 mean
 % The anomaly is the difference from the mean over some baseline period. In
@@ -72,20 +73,18 @@ TempAnnMean = mean(tempData');
   %Use the find function to find rows contain data where stationdata.Year is between 1981 and 2000
 ind_baseline = find(stationdata.Year <= 2000 & stationdata.Year >= 1981);
   %Now calculate the mean over the full time period from 1981-2000
-baseline_mean = mean(TempAnnMean(ind_baseline));
+baseline_mean = mean(tempAnnMean(ind_baseline));
 
 %Calculate the annual mean temperature anomaly as the annual mean
 %temperature for each year minus the baseline mean temperature
-TempAnnMeanAnomaly = TempAnnMean - baseline_mean;
+tempAnnMeanAnomaly = tempAnnMean - baseline_mean;
 
 %% Calculate linear trends for whole time period, and for the time from RecentYear to today
 %Here we will use the function polyfit to calculate a linear fit to the data
-P_all = polyfit(stationdata.Year, TempAnnMeanAnomaly', 1);
+P_all = polyfit(stationdata.Year, tempAnnMeanAnomaly', 1);
     %also calculate the slope and intercept of a best fit line just from
     %1960 to the end of the observational period
 
 RecentYear= 1960
 indrecent = find(stationdata.Year == RecentYear);
-P_recent = polyfit(stationdata.Year(indrecent:end), TempAnnMeanAnomaly(indrecent:end)', 1);
-
-end
+P_recent = polyfit(stationdata.Year(indrecent:end), tempAnnMeanAnomaly(indrecent:end)', 1);
