@@ -144,12 +144,17 @@ colorbar 'EastOutside'
 %temperature trend will have reached 2x the standard deviation of the
 %temperatures from the baseline period
 
-% idk = (find baseline_mean >= 2*matrix_STD)
+EmergenceYear = NaN(length(sta),2)
 
-%noise= plot(P(1,1), matrix_STD)
+for i=1:18
+EmergenceYear= [2*(matrix_STD(i)),matrix_p(i)]
+    end 
+% EmergenceYear= find(Year(2*(matrix_STD(i))'<= P((i:1))))
+
+% Emergence= twentyfirst_stationdata.Year(2*(matrix_STD)'<= P((sta(i):1))
 
 
-noise= plot(P)
+
 % NoiseYears= find(noise >= 2* matrix_STD)
 
 %Plot a global map showing the year of emergence

@@ -31,7 +31,6 @@ function [baseline_model, P, tempAnnMeanAnomaly] = StationModelProjections(stati
 
 %% Read and extract the data from your station from the csv file
 filename = ['model' num2str(station_number) '.csv'];
-    %('model' num2str(stationdata) '.csv');
 twentyfirst_stationdata = readtable(filename);
 
 %% Calculate the mean and standard deviation of the annual mean temperatures
