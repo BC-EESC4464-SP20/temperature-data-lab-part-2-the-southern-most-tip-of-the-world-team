@@ -45,8 +45,8 @@ NewYear=twentyfirst_stationdata.Year;
 recentyears =find((NewYear>=2006)&(NewYear<= 2025));
 baseline_mean = mean(twentyfirst_stationdata.AnnualMeanTemperature(recentyears));
 tempStd = nanstd(twentyfirst_stationdata.AnnualMeanTemperature(recentyears));
-baseline_model= [baseline_mean, tempStd];
-
+baseline_model= [baseline_mean, tempStd]
+Newannualmean= twentyfirst_stationdata(:,2)
 %% Calculate the 5-year moving mean smoothed annual mean temperature anomaly over the modeled period
 
 % future_year= find((NewYear>=2006)&(NewYear<= 2099))
@@ -54,7 +54,7 @@ baseline_model= [baseline_mean, tempStd];
 % Note that you could choose to provide these as an output if you want to
 % have these values available to plot.
  %<-- anomaly
-tempAnnMeanAnomaly = twentyfirst_stationdata.AnnualMeanTemperature - baseline_mean
+tempAnnMeanAnomaly = Newannualmean - baseline_mean
 %annual temps-baselineaverage
 %so all from 2025 and whats the differende between baseline and future
     %how does that change std
@@ -66,4 +66,4 @@ movmeanavg = movmean(tempAnnMeanAnomaly, 5)
 %     %1960 to the end of the observational period
 % % indrecent = find(Year == recentyears);
 P = polyfit(twentyfirst_stationdata.Year,tempAnnMeanAnomaly,1);
-end 
+%end 
