@@ -61,4 +61,4 @@ movmeanavg = movmean(tempAnnMeanAnomaly, 5)
 %     %1960 to the end of the observational period
 % % indrecent = find(Year == recentyears);
 P = polyfit(twentyfirst_stationdata.Year,tempAnnMeanAnomaly,1);
-
+end 

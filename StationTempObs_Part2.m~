@@ -83,10 +83,10 @@ colorbar 'EastOutside'
 P = NaN(length(sta),2); 
 baseline_model= NaN(length(sta),2);
 % movmeanavg= NaN(length(year),length(sta(i));
-tempAnnMeanAnomaly=(94:1);
+% tempAnnMeanAnomaly=(length(sta),1);
 
 for i=1:18
-[baseline_model(i,1:2), P(i,1:2),tempAnnMeanAnomaly(i,94:1)] = StationModelProjections(sta(i))
+[baseline_model(i,1:2), P(i,1:2)] = StationModelProjections(sta(i))
 end 
 
 
@@ -104,10 +104,10 @@ figure(3); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
-matrix_p= P (:,1)'
-scatterm(lat, lon, 100, matrix_p, 'filled')
-plot(P,sta)
-title('Rate of Temperature Change from 2006 to 2025 (°C per Decade)')
+matrix_p_recent= P_recent(:,1)'
+scatterm(lat, lon, 100, matrix_p_recent, 'filled')
+plot(P_recent,sta)
+title('Rate of Temperature Change from 1960 to Present (°C per Decade)')
 colorbar 'EastOutside'
 
 %% 6a. Plot a global map of the interannual variability in annual mean temperature at each station
