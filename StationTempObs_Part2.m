@@ -86,9 +86,9 @@ baseline_model= NaN(length(sta),2);
 tempAnnMeanAnomaly=(94:1);
 
 for i=1:18
-[baseline_model(i,1:2), P(i,1:2),tempAnnMeanAnomaly(i,94:1)] = StationModelProjections(sta(i))
+[baseline_model(i,1:2), P(i,1:2),] = StationModelProjections(sta(i))
 end 
-
+% tempAnnMeanAnomaly(i,94:1)
 
 % Write a for loop that will use the function StationModelProjections to
 % extract from the model projections for each station:
@@ -107,13 +107,20 @@ plotm(coastlat,coastlon)
 matrix_p= P (:,1)'
 scatterm(lat, lon, 100, matrix_p, 'filled')
 plot(P,sta)
-title('Rate of Temperature Change from 2006 to 2025 (°C per Decade)')
+title('Rate of Projected Temperature Change from 2006 to 2099 (°C per Decade)')
 colorbar 'EastOutside'
 
+
+%scale and color difference doesnt match whats online
+%think it could be our function thats messed up because are factors that
+%are 2006-2025 and 2006-2099 mixed up
+%baseline model, why std there too, im confused
+%how to switch color bar 
+%P clearly isnt right and tried to investigate and change 
 %% 6a. Plot a global map of the interannual variability in annual mean temperature at each station
 %as determined by the baseline standard deviation of the temperatures from
 %2005 to 2025
-%<--
+%<--STD of annual mean temp
 
 %% 6b-c. Calculate the time of emergence of the long-term change in temperature from local variability
 %There are many ways to make this calcuation, but here we will compare the

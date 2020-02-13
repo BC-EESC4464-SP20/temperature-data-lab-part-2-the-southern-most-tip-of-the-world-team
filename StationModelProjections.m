@@ -48,15 +48,19 @@ tempStd = nanstd(twentyfirst_stationdata.AnnualMeanTemperature)
 baseline_model= [recentmean, tempStd]
 
 %% Calculate the 5-year moving mean smoothed annual mean temperature anomaly over the modeled period
+
+future_year= find((NewYear>=2006)&(NewYear<= 2099))
+futuremean= mean(twentyfirst_stationdata.AnnualMeanTemperature(future_year))
 % Note that you could choose to provide these as an output if you want to
 % have these values available to plot.
  %<-- anomaly
-tempAnnMeanAnomaly = twentyfirst_stationdata.AnnualMeanTemperature - recentmean
+tempAnnMeanAnomaly = twentyfirst_stationdata.AnnualMeanTemperature - futuremean
+%so all from 2025 and whats the differende between baseline and future
+    %how does that change std
  %<-- smoothed anomaly
 movmeanavg = movmean(tempAnnMeanAnomaly, 5)
+
 %% Calculate the linear trend in temperature this station over the modeled 21st century period
-%[New_all, New_recent] = StationModelProjection('403001.csv', recentyears)
-% New_all = polyfit(twentyfirst_stationdata.Year(NewYear),TempAnnMeanAnomaly(NewYear));
 %     %also calculate the slope and intercept of a best fit line just from
 %     %1960 to the end of the observational period
 % % indrecent = find(Year == recentyears);
