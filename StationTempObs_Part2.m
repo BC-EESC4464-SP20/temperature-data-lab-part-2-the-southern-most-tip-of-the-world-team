@@ -83,21 +83,29 @@ colorbar 'EastOutside'
 P = NaN(length(sta),2); 
 baseline_model= NaN(length(sta),2);
 % movmeanavg= NaN(length(year),length(sta(i));
-tempAnnMeanAnomaly=(94:1);
+tempAnnMeanAnomaly=NaN(length(sta),94);
 
 for i=1:18
-[baseline_model(i,1:2), P(i,1:2),] = StationModelProjections(sta(i))
+[baseline_model(i,1:2), P(i,1:2), tempAnnMeanAnomaly(i,:)] = StationModelProjections(sta(i))
 end 
-% tempAnnMeanAnomaly(i,94:1)
 
 % Write a for loop that will use the function StationModelProjections to
 % extract from the model projections for each station:
-% 1) the mean and standard deviation of the baseline period
-% (2006-2025) temperatures, 2) the annual mean temperature anomaly, and 3)
-% the slope and y-intercept of the linear trend over the 21st century
+% --1) the mean and standard deviation of the baseline period
+% (2006-2025) temperatures,
+% 2) the annual mean temperature anomaly, and
+% ---3) the slope and y-intercept of the linear trend over the 21st century
 %<--
 %try running the loop for one and move on from there 
 %and then do the rest 
+
+for i=1:18
+sta(i);
+stationanom = plot(twentyfirst_stationdata.Year, (movmean(tempAnnMeanAnomaly(i,1:94),5)));
+% smoothmove = movmean(stationanom, 5)
+hold on
+end 
+
 %% 5. Plot a global map of the rate of temperature change projected at each station over the 21st century
 
 figure(3); clf
@@ -107,21 +115,23 @@ plotm(coastlat,coastlon)
 matrix_p= P (:,1)'
 scatterm(lat, lon, 100, matrix_p, 'filled')
 plot(P,sta)
-title('Rate of Projected Temperature Change from 2006 to 2099 (°C per Decade)')
+title('Rate of Projected Temperature Change from 2006 to 2099 (°C per Year)')
 colorbar 'EastOutside'
 
 
-
-%scale and color difference doesnt match whats online
-%think it could be our function thats messed up because are factors that
-%are 2006-2025 and 2006-2099 mixed up
-%baseline model, why std there too, im confused
-%how to switch color bar 
-%P clearly isnt right and tried to investigate and change 
 %% 6a. Plot a global map of the interannual variability in annual mean temperature at each station
 %as determined by the baseline standard deviation of the temperatures from
 %2005 to 2025
-%<--STD of annual mean temp
+
+figure(3); clf
+worldmap('World')
+load coastlines
+plotm(coastlat,coastlon)
+matrix_STD= baseline_model(:,2)';
+scatterm(lat, lon, 100, matrix_STD, 'filled')
+plot(matrix_STD,sta)
+title('Baseline Interannual Variability (standard deviation of annual mean temperatire, 2006-2025')
+colorbar 'EastOutside'
 
 %% 6b-c. Calculate the time of emergence of the long-term change in temperature from local variability
 %There are many ways to make this calcuation, but here we will compare the
@@ -133,7 +143,15 @@ colorbar 'EastOutside'
 %projections, calculated as the time (beginning from 2006) when the linear
 %temperature trend will have reached 2x the standard deviation of the
 %temperatures from the baseline period
-%<--
+
+% idk = (find baseline_mean >= 2*matrix_STD)
+
+%noise= plot(P(1,1), matrix_STD)
+
+
+noise= plot(P)
+% NoiseYears= find(noise >= 2* matrix_STD)
 
 %Plot a global map showing the year of emergence
 %<write this out in words first and equations on paper 
+%

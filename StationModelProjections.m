@@ -1,4 +1,4 @@
-function [baseline_model, P] = StationModelProjections(station_number)
+function [baseline_model, P, tempAnnMeanAnomaly] = StationModelProjections(station_number)
 
 % StationModelProjections Analyze modeled future temperature projections at individual stations
 %===================================================================
