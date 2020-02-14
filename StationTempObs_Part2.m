@@ -98,16 +98,46 @@ end
 %<--
 %try running the loop for one and move on from there 
 %and then do the rest 
+%% HELP ME HERE I CANT GET IT--the mean and standard deviation of the baseline period (2006-2025) temperatures,
+figure(8); clf
+for i=1:18
+base=plot(twentyfirst_stationdata.Year,baseline_model(i,2))
+errorbar(baseline_model(i,1),baseline_model(i,2))
+%     hold on
+%     title("Average Temperature per Month from 1888 to 1991 ")
+x = twentyfirst_stationdata.Year
+y = baseline_model(i,1)
+    hold on
+    ylabel("Temperature (°C)")
+    xlabel("Year")
+end
+%% 
 
+figure(6); clf
 for i=1:18
 sta(i);
 stationanom = plot(twentyfirst_stationdata.Year, (movmean(tempAnnMeanAnomaly(i,1:94),5)));
 hold on
-end 
+title('Annual Mean Anomaly for All Stations from 2006 to 2099 (°C per Year)')
+ylabel("Temperature (°C)")
+xlabel("Year")
+end
+
+figure(7); clf
+for i=1:18
+sta(i);
+x = twentyfirst_stationdata.Year
+y = P(i,1)*x +P(i,2)
+plot(x,y)
+hold on
+title('Linear Trend Over 21st Century for Each Station (°C per Year)')
+ylabel("Temperature (°C)")
+xlabel("Year")
+end
 
 %% 5. Plot a global map of the rate of temperature change projected at each station over the 21st century
 
-figure(3); clf
+figure(4); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
@@ -122,14 +152,14 @@ colorbar 'EastOutside'
 %as determined by the baseline standard deviation of the temperatures from
 %2005 to 2025
 
-figure(3); clf
+figure(5); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
 matrix_STD= baseline_model(:,2)';
 scatterm(lat, lon, 100, matrix_STD, 'filled')
 plot(matrix_STD,sta)
-title('Baseline Interannual Variability (standard deviation of annual mean temperatire, 2006-2025')
+title('Baseline Interannual Variability (standard deviation of annual mean temperature) from 2006-2025')
 colorbar 'EastOutside'
 
 %% 6b-c. Calculate the time of emergence of the long-term change in temperature from local variability
@@ -144,7 +174,7 @@ colorbar 'EastOutside'
 %temperatures from the baseline period
 
 
-Emergence= twentyfirst_stationdata.Year(2*(matrix_STD)<= matrix_p((sta(i))
+% Emergence= twentyfirst_stationdata.Year(2*(matrix_STD)<= matrix_p((sta(i))
 
 
 
