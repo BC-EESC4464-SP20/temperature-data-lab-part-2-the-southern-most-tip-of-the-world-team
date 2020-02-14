@@ -102,7 +102,6 @@ end
 for i=1:18
 sta(i);
 stationanom = plot(twentyfirst_stationdata.Year, (movmean(tempAnnMeanAnomaly(i,1:94),5)));
-% smoothmove = movmean(stationanom, 5)
 hold on
 end 
 
@@ -144,18 +143,21 @@ colorbar 'EastOutside'
 %temperature trend will have reached 2x the standard deviation of the
 %temperatures from the baseline period
 
-EmergenceYear = NaN(length(sta),2)
 
-for i=1:18
-EmergenceYear= [2*(matrix_STD(i)),matrix_p(i)]
-    end 
-% EmergenceYear= find(Year(2*(matrix_STD(i))'<= P((i:1))))
-
-% Emergence= twentyfirst_stationdata.Year(2*(matrix_STD)'<= P((sta(i):1))
+Emergence= twentyfirst_stationdata.Year(2*(matrix_STD)<= matrix_p((sta(i))
 
 
 
-% NoiseYears= find(noise >= 2* matrix_STD)
+
+% EmergenceYear= NaN(length(sta),3)
+% 
+% % [baseline_model(i,1:2), P(i,1:2), tempAnnMeanAnomaly(i,:)] = StationModelProjections(sta(i))
+% for i=1:18 
+% [(2*matrix_STD(sta(i),3)),matrix_p(sta(i),2),sta(i,1)]= EmergenceYear
+% end 
+
+
+
 
 %Plot a global map showing the year of emergence
 %<write this out in words first and equations on paper 
