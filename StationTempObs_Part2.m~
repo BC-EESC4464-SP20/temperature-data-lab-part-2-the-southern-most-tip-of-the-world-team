@@ -90,11 +90,11 @@ base=plot(twentyfirst_stationdata.Year,baseline_model(i,1))
 
 P = NaN(length(sta),2); 
 baseline_model= NaN(length(sta),2);
-%movmeanavg= NaN(length(sta),18);
+movmeanavg= NaN(length(year),length(sta(i));
 tempAnnMeanAnomaly=NaN(length(sta),94);
 
 for i=1:18
-[baseline_model(i,1:2), P(i,1:2), tempAnnMeanAnomaly(i,:)] = StationModelProjections(sta(i))
+[baseline_model(i,1:2), P(i,1:2), tempAnnMeanAnomaly(i,:), movmeanavg] = StationModelProjections(sta(i))
 end 
 
 % Write a for loop that will use the function StationModelProjections to
@@ -174,7 +174,7 @@ colorbar 'EastOutside'
 % Emergence= twentyfirst_stationdata.Year(2*(matrix_STD)<= matrix_p((sta(i))
 
 
-twovari= 2
+
 
 % EmergenceYear= NaN(length(sta),3)
 % 
