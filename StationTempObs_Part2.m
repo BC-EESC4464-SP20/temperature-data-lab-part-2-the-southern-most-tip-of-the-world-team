@@ -66,17 +66,20 @@ colorbar 'EastOutside'
 %global mean temperature data in Part 1 of this lab).
 %Data visualization recommendation - use the colormap "balance" from the
 %%HELPPP
-figure(8); clf
-% for i=1:18
-base=plot(twentyfirst_stationdata.Year,baseline_model(i,1))
-% errorbar(baseline_model(i,1),baseline_model(i,2))
-%     hold on
-%     title("Average Temperature per Month from 1888 to 1991 ")
-% x = twentyfirst_stationdata.Year
-% y = baseline_model(i,1)
-    hold on
-    ylabel("Temperature (°C)")
-    xlabel("Year")
+matrix_mov= movmeanavg'
+
+figure(222); clf
+for i=1:18
+plot(twentyfirst_stationdata.Year, matrix_mov (:,i), 'color', rand(1,3))
+legendCell{i} = num2str(sta(i));
+legend(legendCell)
+hold on
+end 
+legend('location', 'northwest')
+title('Smoothed temperature anomaly at all 18 stations (5 years movemean)')
+xlabel('year')
+ylabel('temperature anomaly(degree celcius)')
+
 %% 4. Now calculate the projected future rate of temperature change at each of these 18 stations
 % using annual mean temperature data from GFDL model output following the
 % A2 scenario (here you will call the function StationModelProjections,
@@ -90,12 +93,13 @@ base=plot(twentyfirst_stationdata.Year,baseline_model(i,1))
 
 P = NaN(length(sta),2); 
 baseline_model= NaN(length(sta),2);
-%movmeanavg= NaN(length(sta),18);
+movmeanavg= NaN(length(sta),94);
 tempAnnMeanAnomaly=NaN(length(sta),94);
 
 for i=1:18
-[baseline_model(i,1:2), P(i,1:2), tempAnnMeanAnomaly(i,:)] = StationModelProjections(sta(i))
+[baseline_model(i,1:2), P(i,1:2), tempAnnMeanAnomaly(i,:), movmeanavg(i,:)] = StationModelProjections(sta(i))
 end 
+%% 
 
 % Write a for loop that will use the function StationModelProjections to
 % extract from the model projections for each station:
@@ -170,22 +174,16 @@ colorbar 'EastOutside'
 %temperature trend will have reached 2x the standard deviation of the
 %temperatures from the baseline period
 
+twoSTD= (2*(baseline_model(:,2)))
+temp_emge= twoSTD./P(:,1)
+year_emge= temp_emge+2006
+year_emergence= ceil(year_emge)
 
-% Emergence= twentyfirst_stationdata.Year(2*(matrix_STD)<= matrix_p((sta(i))
+figure(9); clf
+worldmap('World')
+load coastlines
+plotm(coastlat,coastlon)
+scatterm(lat,lon,100,year_emergence,'filled')
+colorbar
+title('Year of Emergence of Temperature Increase')
 
-
-twovari= 2
-
-% EmergenceYear= NaN(length(sta),3)
-% 
-% % [baseline_model(i,1:2), P(i,1:2), tempAnnMeanAnomaly(i,:)] = StationModelProjections(sta(i))
-% for i=1:18 
-% [(2*matrix_STD(sta(i),3)),matrix_p(sta(i),2),sta(i,1)]= EmergenceYear
-% end 
-
-
-
-
-%Plot a global map showing the year of emergence
-%<write this out in words first and equations on paper 
-%
